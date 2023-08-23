@@ -23,7 +23,6 @@ export const MyHeader = styled(Toolbar)(({ theme }) => ({
     justifyContent: "space-between",
     padding: "0 20px",
   },
-  [theme.breakpoints.only('sm')]
 }));
 
 export const OfferText = styled(Typography)(() => ({

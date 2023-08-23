@@ -9,7 +9,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Toolbar,
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";

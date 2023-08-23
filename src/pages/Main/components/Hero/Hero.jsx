@@ -91,6 +91,8 @@ const Hero = (props) => {
           padding: "30px 0",
           alignContent: "space-between",
           alignItems: "flex-start",
+          flexWrap: "wrap",
+          gap: "20px",
         }}
       >
         <img height="36px" src={Versace} alt="vercase" />

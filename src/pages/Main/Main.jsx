@@ -2,13 +2,20 @@ import React, { useCallback, useEffect, useState } from "react";
 import Hero from "./components/Hero/Hero";
 import { Box } from "@mui/material";
 import API from "../../requester";
-import NewProducts from "./components/NewProducts/NewProducts";
-import TopProducts from "./components/TopProducts/TopProducts";
+import ProductsList from "../../components/ProductsList/ProductsList";
+import Reviews from "./components/Reviews/Reviews";
+import Banner from "../../components/Banner/Banner";
 // import PropTypes from "prop-types";
 
 const Main = (props) => {
   const [newProducts, setNewProducts] = useState([]);
   const [topProducts, setTopProducts] = useState([]);
+  const [reviews, setReviews] = useState([]);
+
+  const getReviews = useCallback(async () => {
+    const response = await API.get("quotes");
+    setReviews(response.data.quotes);
+  }, []);
 
   const getProducts = useCallback(async () => {
     const response = await API.get("products", { params: { limit: 100 } });
@@ -26,11 +33,23 @@ const Main = (props) => {
     getProducts();
   }, [getProducts]);
 
+  useEffect(() => {
+    getReviews();
+  }, [getReviews]);
+
   return (
     <Box>
       <Hero />
-      <NewProducts products={newProducts} />
-      <TopProducts products={topProducts} />
+      <ProductsList title="New Arrivals" products={newProducts} />
+      <Box sx={{ mt: 5 }}>
+        <ProductsList title="Top Selling" products={topProducts} />
+      </Box>
+      <Box sx={{ mt: 5 }}>
+        <Reviews list={reviews} />
+      </Box>
+      <Box sx={{ px: "100px", transform: "translateY(50%)" }}>
+        <Banner />
+      </Box>
     </Box>
   );
 };

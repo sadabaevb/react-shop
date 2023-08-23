@@ -3,11 +3,10 @@ import React from "react";
 import { Box, Chip, Rating, Typography } from "@mui/material";
 
 const ProductCard = ({ product }) => {
-  console.log("product: ", product);
   return (
-    <Box>
+    <Box sx={{ maxWidth: "100%" }}>
       <img
-        width={295}
+        width="100%"
         height={298}
         src={product.thumbnail}
         alt={product.title}
