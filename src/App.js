@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout/MainLayout";
-// import Login from "./pages/Login/Login";
-// import Registration from "./pages/Registration/Registration";
-import ProductDetails from "./pages/Products/ProductDetails";
-import { ThemeProvider } from "@emotion/react";
-import theme from "./theme";
+
 import { CssBaseline } from "@mui/material";
-import Main from "./pages/Main/Main";
+import { ThemeProvider } from "@emotion/react";
+
+import theme from "theme";
+import Main from "pages/Main/Main";
+import MainLayout from "layouts/MainLayout/MainLayout";
+import ProductDetails from "pages/ProductDetails/ProductDetails";
 
 function App() {
   return (

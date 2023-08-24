@@ -11,19 +11,20 @@ import "swiper/css/navigation";
 import "./styles.css";
 
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { Title } from "../../../../globalStyles";
 
 const Reviews = ({ list }) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
   return (
-    <Box sx={{ px: "100px" }}>
+    <Box sx={{ px: { xs: "16px", md: "100px" } }}>
       <Title sx={{ my: "80px" }}>OUR HAPPY CUSTOMERS</Title>
       <Swiper
         initialSlide={3}
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={isMobile ? 1 : 3}
         navigation={true}
         coverflowEffect={{
           rotate: 50,
@@ -33,7 +34,7 @@ const Reviews = ({ list }) => {
           slideShadows: true,
           borderRadius: "62px",
         }}
-        pagination={true}
+        pagination={isMobile ? false : true}
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper"
       >

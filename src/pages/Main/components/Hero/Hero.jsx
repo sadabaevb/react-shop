@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import Background from "../../../../assets/images/herobackground.png";
+import BackMobile from "../../../../assets/images/back-mobile.png";
 import Prada from "../../../../assets/images/prada.svg";
 import Calvin from "../../../../assets/images/calvin.svg";
 import Versace from "../../../../assets/images/versace.svg";
@@ -28,10 +29,9 @@ const Hero = (props) => {
       <Grid
         container
         sx={{
-          height: "70vh",
           backgroundSize: "cover",
           backgroundPosition: "bottom",
-          backgroundImage: `url(${Background})`,
+          backgroundImage: isMobile ? null : `url(${Background})`,
         }}
       >
         <Grid
@@ -41,7 +41,7 @@ const Hero = (props) => {
           xs={12}
           sm={12}
           md={6}
-          sx={{ paddingLeft: "100px" }}
+          sx={{ pl: { xs: "16px", lg: "100px" } }}
         >
           <Grid item>
             <Typography
@@ -78,9 +78,15 @@ const Hero = (props) => {
             </List>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          2
-        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            background: isMobile && `url(${BackMobile})`,
+            minHeight: "447px",
+          }}
+        ></Grid>
       </Grid>
 
       <Box

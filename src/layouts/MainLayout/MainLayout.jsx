@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 import Footer from "../../components/Footer/Footer";
+import Banner from "../../components/Banner/Banner";
 // import PropTypes from "prop-types";
 
 const Container = styled(Box)(() => ({
@@ -16,6 +17,11 @@ const MainLayout = (props) => {
     <Container>
       <Header />
       <Outlet />
+      <Box
+        sx={{ px: { xs: "16px", lg: "100px" }, transform: "translateY(50%)" }}
+      >
+        <Banner />
+      </Box>
       <Footer />
     </Container>
   );

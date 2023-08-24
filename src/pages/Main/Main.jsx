@@ -1,13 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Hero from "./components/Hero/Hero";
-import { Box } from "@mui/material";
-import API from "../../requester";
-import ProductsList from "../../components/ProductsList/ProductsList";
-import Reviews from "./components/Reviews/Reviews";
-import Banner from "../../components/Banner/Banner";
 // import PropTypes from "prop-types";
 
-const Main = (props) => {
+import { Box } from "@mui/material";
+
+import API from "requester";
+import ProductsList from "components/ProductsList/ProductsList";
+
+import Hero from "./components/Hero/Hero";
+import Reviews from "./components/Reviews/Reviews";
+
+const Main = () => {
   const [newProducts, setNewProducts] = useState([]);
   const [topProducts, setTopProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -44,11 +46,8 @@ const Main = (props) => {
       <Box sx={{ mt: 5 }}>
         <ProductsList title="Top Selling" products={topProducts} />
       </Box>
-      <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: { xs: 1, lg: 5 }, mb: { xs: "-200px", lg: 0 } }}>
         <Reviews list={reviews} />
-      </Box>
-      <Box sx={{ px: "100px", transform: "translateY(50%)" }}>
-        <Banner />
       </Box>
     </Box>
   );

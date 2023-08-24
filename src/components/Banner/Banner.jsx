@@ -1,13 +1,15 @@
 import React from "react";
 // import PropTypes from "prop-types";
+
+import { Box, InputAdornment } from "@mui/material";
+import { Email } from "@mui/icons-material";
+
 import {
   BannerContainer,
   BannerText,
   ButtonBanner,
   EmailTextField,
 } from "./styles";
-import { Box, InputAdornment } from "@mui/material";
-import { Email } from "@mui/icons-material";
 
 const Banner = (props) => {
   return (

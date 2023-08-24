@@ -1,13 +1,29 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import { Box, Chip, Rating, Typography } from "@mui/material";
+import { Box, Chip, Rating, Typography, useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const navigate = useNavigate();
+
+  const toDetails = () => {
+    navigate(`/products/${product.id}`);
+  };
   return (
-    <Box sx={{ maxWidth: "100%" }}>
+    <Box
+      sx={{
+        maxWidth: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+      }}
+      onClick={toDetails}
+    >
       <img
         width="100%"
-        height={298}
+        height={isMobile ? 200 : 298}
         src={product.thumbnail}
         alt={product.title}
       />

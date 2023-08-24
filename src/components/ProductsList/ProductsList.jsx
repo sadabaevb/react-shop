@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import { Box, Button, Collapse, Grid } from "@mui/material";
-import ProductCard from "../ProductCard/ProductCard";
+
+import ProductCard from "components/ProductCard/ProductCard";
+import { Title } from "globalStyles";
+
 import { ProductsListContainer } from "./styles";
-import { Title } from "../../globalStyles";
 
 const ProductsList = (props) => {
   const { title, products } = props;
@@ -34,7 +37,7 @@ const ProductsList = (props) => {
 
       <Grid container justifyContent="space-around" spacing={4}>
         {mainProducts.map((item) => (
-          <Grid key={item.id} item xs={12} md={3} lg={3}>
+          <Grid key={item.id} item xs={6} md={3} lg={3}>
             <ProductCard product={item} />
           </Grid>
         ))}
@@ -42,7 +45,7 @@ const ProductsList = (props) => {
       <Collapse in={isViewAll}>
         <Grid container justifyContent="space-around" spacing={4}>
           {additionalProducts.map((item) => (
-            <Grid key={item.id} item xs={12} md={3} lg={3}>
+            <Grid key={item.id} item xs={6} md={3} lg={3}>
               <ProductCard product={item} />
             </Grid>
           ))}
