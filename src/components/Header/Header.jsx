@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   AppBar,
+  Badge,
   Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Drawer,
   IconButton,
   InputAdornment,
@@ -30,9 +35,19 @@ import MenuSimple from "./DropDown";
 const Header = () => {
   const [isShowOffer, setIsShowOffer] = useState(true);
   const [openMenu, setOpenMenu] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+
+  const totalQuantityInLS =
+    JSON.parse(localStorage.getItem("__ada-shop:cart"))?.totalQuantity || 0;
+
+  const [totalQuantity, setTotalQuantity] = useState(totalQuantityInLS);
 
   const toggleMenu = () => {
     setOpenMenu((open) => !open);
+  };
+
+  const toggleCart = () => {
+    setOpenCart((open) => !open);
   };
 
   const handleClose = () => {
@@ -40,6 +55,15 @@ const Header = () => {
 
     setIsShowOffer((open) => !open);
   };
+
+  useEffect(() => {
+    window.addEventListener("storage", () => {
+      const totalQuantityInLS =
+        JSON.parse(localStorage.getItem("__ada-shop:cart"))?.totalQuantity || 0;
+      setTotalQuantity(totalQuantityInLS);
+    });
+  }, []);
+
   return (
     <AppBar position="sticky" sx={{ background: "#fff", boxShadow: 0 }}>
       <TopHeader radmir={23} isShowOffer={isShowOffer}>
@@ -77,8 +101,13 @@ const Header = () => {
           placeholder="Search for products..."
         />
         <Box>
-          <IconButton sx={{ width: "24px", height: "24px", marginRight: 1 }}>
-            <ShoppingCartOutlinedIcon />
+          <IconButton
+            onClick={toggleCart}
+            sx={{ width: "24px", height: "24px", marginRight: 1 }}
+          >
+            <Badge badgeContent={totalQuantity} color="secondary">
+              <ShoppingCartOutlinedIcon />
+            </Badge>
           </IconButton>
           <IconButton sx={{ width: "24px", height: "24px" }}>
             <AccountCircleOutlinedIcon />
@@ -96,6 +125,12 @@ const Header = () => {
           </ListItem>
         </List>
       </Drawer>
+
+      <Dialog open={openCart} onClose={toggleCart}>
+        <DialogTitle>TITLE</DialogTitle>
+        <DialogContent></DialogContent>
+        <DialogActions></DialogActions>
+      </Dialog>
     </AppBar>
   );
 };

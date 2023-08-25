@@ -1,3 +1,5 @@
+import React, { useCallback, useEffect, useState } from "react";
+
 import {
   Box,
   Breadcrumbs,
@@ -6,7 +8,6 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
 import {
   ProductBaseImage,
   ProductBaseInfo,
@@ -19,13 +20,18 @@ import NavigateNext from "@mui/icons-material/NavigateNext";
 import { Link, useParams } from "react-router-dom";
 import API from "requester";
 import { Title } from "globalStyles";
+import SelColors from "./components/SelColors";
+import ChooseSize from "./components/ChooseSize";
+import AddToCart from "./components/AddToCart";
 // import PropTypes from "prop-types";
 
 const ProductDetails = () => {
+  const { id } = useParams();
+
   const [product, setProduct] = useState(null);
   const [currentImage, setCurrentImage] = useState("");
-  console.log("product: ", product);
-  const { id } = useParams();
+  const [size, setSize] = useState("small");
+  console.log("size: ", size);
 
   const breadcrumbs = [
     <Link underline="hover" key="1" color="inherit" href="/">
@@ -64,6 +70,10 @@ const ProductDetails = () => {
 
   const handleBaseImageChange = (image) => {
     setCurrentImage(image);
+  };
+
+  const handleSizeChange = (event, newValue) => {
+    setSize(newValue);
   };
 
   if (!product) {
@@ -133,6 +143,15 @@ const ProductDetails = () => {
             />
           </Box>
           <Typography>{product.description}</Typography>
+          <Box sx={{ mt: 1 }}>
+            <SelColors />
+          </Box>
+          <Box sx={{ mt: 1 }}>
+            <ChooseSize size={size} onChange={handleSizeChange} />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <AddToCart product={product} />
+          </Box>
         </ProductBaseInfo>
       </ProductListing>
     </ProductDetailsContainer>
