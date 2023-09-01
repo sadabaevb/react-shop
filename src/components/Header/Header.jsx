@@ -4,16 +4,14 @@ import {
   AppBar,
   Badge,
   Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Drawer,
   IconButton,
   InputAdornment,
   List,
   ListItem,
   ListItemText,
+  MenuItem,
+  TextField,
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -31,11 +29,16 @@ import {
   TopHeader,
 } from "./styles";
 import MenuSimple from "./DropDown";
+import { useTranslation } from "react-i18next";
+import Cart from "components/Cart/Cart";
 
 const Header = () => {
   const [isShowOffer, setIsShowOffer] = useState(true);
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("ru");
+
+  const { t, i18n } = useTranslation();
 
   const totalQuantityInLS =
     JSON.parse(localStorage.getItem("__ada-shop:cart"))?.totalQuantity || 0;
@@ -64,12 +67,18 @@ const Header = () => {
     });
   }, []);
 
+  const handleLangChange = (event) => {
+    setSelectedLang(event.target.value);
+    i18n.changeLanguage(event.target.value);
+  };
+
   return (
     <AppBar position="sticky" sx={{ background: "#fff", boxShadow: 0 }}>
       <TopHeader radmir={23} isShowOffer={isShowOffer}>
         <OfferText align="center">
           Sign up and get 20% off to your first order.
           <SignUpText>Sign Up Now</SignUpText>
+          {t("welcome")}
         </OfferText>
 
         <CloseButton onClick={handleClose}>
@@ -81,13 +90,13 @@ const Header = () => {
           <MenuButton onClick={toggleMenu}>
             <Menu />
           </MenuButton>
-          <LogoText variant="h1">SHOP.CO</LogoText>
+          <LogoText variant="h3">SHOP.CO</LogoText>
         </Box>
 
         <NavMenu>
           <MenuSimple />
-          <NavLink>On Sale</NavLink>
-          <NavLink>New Arrivals</NavLink>
+          <NavLink>{t("onSale")}</NavLink>
+          <NavLink>{t("newArrivals")}</NavLink>
           <NavLink>Brands</NavLink>
         </NavMenu>
         <SearchBar
@@ -101,6 +110,16 @@ const Header = () => {
           placeholder="Search for products..."
         />
         <Box>
+          <TextField
+            margin="none"
+            variant="standard"
+            select
+            value={selectedLang}
+            onChange={handleLangChange}
+          >
+            <MenuItem value="ru">RU</MenuItem>
+            <MenuItem value="en">EN</MenuItem>
+          </TextField>
           <IconButton
             onClick={toggleCart}
             sx={{ width: "24px", height: "24px", marginRight: 1 }}
@@ -126,11 +145,7 @@ const Header = () => {
         </List>
       </Drawer>
 
-      <Dialog open={openCart} onClose={toggleCart}>
-        <DialogTitle>TITLE</DialogTitle>
-        <DialogContent></DialogContent>
-        <DialogActions></DialogActions>
-      </Dialog>
+      <Cart open={openCart} onClose={toggleCart} />
     </AppBar>
   );
 };

@@ -43,7 +43,7 @@ export const SignUpText = styled(Link)(() => ({
 export const LogoText = styled(Typography)(() => ({
   fontFamily: "Integral CF Regular",
   color: "#000",
-  fontSize: "24px",
+  fontSize: "24px ",
   fontWeight: 600,
 }));
 

@@ -1,9 +1,11 @@
-import { createTheme } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 
-const theme = createTheme({
+let theme = createTheme({
   typography: {
     fontFamily: "Satoshi, sans-serif",
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;

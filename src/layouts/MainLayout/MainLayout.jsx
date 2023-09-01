@@ -16,6 +16,7 @@ const MainLayout = (props) => {
   return (
     <Container>
       <Header />
+
       <Outlet />
       <Box
         sx={{ px: { xs: "16px", lg: "100px" }, transform: "translateY(50%)" }}

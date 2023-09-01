@@ -17,14 +17,33 @@ const AddToCart = ({ product }) => {
       totalQuantity: 0,
       list: [],
     };
-    const newObj = {
-      totalQuantity: dataInLS.totalQuantity + quantity,
-      list: [
-        ...dataInLS.list,
-        { ...product, quantity: quantity, size: "small" },
-      ],
-    };
-    localStorage.setItem("__ada-shop:cart", JSON.stringify(newObj));
+
+    const sameProduct = dataInLS.list.find(
+      (item) => item.id === product.id && item.size === product.size
+    );
+
+    if (sameProduct) {
+      const newProducts = dataInLS.list.map((item) => {
+        if (item.id === sameProduct.id && item.size === sameProduct.size) {
+          return {
+            ...item,
+            quantity: item.quantity + quantity,
+          };
+        } else return item;
+      });
+      const newObj = {
+        totalQuantity: dataInLS.totalQuantity + quantity,
+        list: newProducts,
+      };
+      localStorage.setItem("__ada-shop:cart", JSON.stringify(newObj));
+    } else {
+      const newObj = {
+        totalQuantity: dataInLS.totalQuantity + quantity,
+        list: [...dataInLS.list, { ...product, quantity: quantity }],
+      };
+      localStorage.setItem("__ada-shop:cart", JSON.stringify(newObj));
+    }
+
     window.dispatchEvent(new Event("storage"));
   };
 

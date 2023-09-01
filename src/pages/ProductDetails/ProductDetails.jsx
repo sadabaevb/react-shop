@@ -66,6 +66,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getDetails();
+    window.scrollTo(0, 0);
   }, [getDetails]);
 
   const handleBaseImageChange = (image) => {
@@ -150,7 +151,7 @@ const ProductDetails = () => {
             <ChooseSize size={size} onChange={handleSizeChange} />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <AddToCart product={product} />
+            <AddToCart product={{ ...product, size }} />
           </Box>
         </ProductBaseInfo>
       </ProductListing>
