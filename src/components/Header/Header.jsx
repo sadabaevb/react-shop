@@ -98,6 +98,7 @@ const Header = () => {
           <NavLink>{t("onSale")}</NavLink>
           <NavLink>{t("newArrivals")}</NavLink>
           <NavLink>Brands</NavLink>
+          <NavLink to="products">Products</NavLink>
         </NavMenu>
         <SearchBar
           variant="standard"
